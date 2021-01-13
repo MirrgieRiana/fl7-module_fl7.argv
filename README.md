@@ -6,7 +6,7 @@ fl7.argv - Very simple ARGV parser.
 # Synopsys
 
 ```
-$ fl7 'USE(MODULE(FILE; "fl7.argv")).parse(ARGV[1; ]) => JSON >> 2' -a A1 +abc -a A2 file1 -b B1 --abc ABC1 -a A3 +a --abc=ABC2 file2
+$ fl7 'USE(MODULE(FILE; "fl7.argv")).parse("Usage: args..."; ARGV[1; ]) => JSON >> 2' -a A1 +abc -a A2 file1 -b B1 --abc ABC1 -a A3 +a --abc=ABC2 file2
 ```
 
 prints
@@ -52,7 +52,8 @@ $ fl7m pull 'https://raw.githubusercontent.com/MirrgieRiana/fl7-module_fl7.argv/
 
 # Usage
 
-## `_.parse(list_arg)` function
+## `_.parse(usage; list_arg)` function
 
+- `usage`: a parse error message as a strings
 - `list_arg`: set the `ARGV[1; ]` as an array of strings
 - Returns: an object whose value is an array of parsed arguments
