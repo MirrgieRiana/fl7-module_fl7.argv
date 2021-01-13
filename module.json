@@ -1,0 +1,9 @@
+{
+  "name": "fl7.argv",
+  "files": [
+    "module.json",
+    "LICENSE",
+    "README.md",
+    "main.fl7"
+  ]
+}
