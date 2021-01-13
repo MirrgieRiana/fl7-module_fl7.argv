@@ -1,0 +1,20 @@
+name: Test
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          curl https://raw.githubusercontent.com/MirrgieRiana/fluorite-7/master/install.bash | bash
+      - name: Test
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          ./fluorite7 test/test.fl7
