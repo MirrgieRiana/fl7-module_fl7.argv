@@ -2,7 +2,12 @@
 
 {
 
-  parse : list_arg -> (
+  parse : usage, list_arg -> (
+    print_usage : \(
+      usage => ERR;
+      EXIT(1);
+    );
+
     list_arg_2 : list_arg;
 
     list_param : [];
@@ -23,7 +28,7 @@
       m : arg =~ /^--(.*)$/;
       m && (
         key : m.1;
-        $#list_arg_2 <= 0 && usage();
+        $#list_arg_2 <= 0 && print_usage();
         value : list_arg_2.0;
         list_arg_2 = list_arg_2[1; ];
         list_param[$#list_param] = [key, value];
@@ -41,7 +46,7 @@
       m : arg =~ /^-([a-zA-Z0-9])$/;
       m && (
         key : m.1;
-        $#list_arg_2 <= 0 && usage();
+        $#list_arg_2 <= 0 && print_usage();
         value : list_arg_2.0;
         list_arg_2 = list_arg_2[1; ];
         list_param[$#list_param] = [key, value];
@@ -52,6 +57,7 @@
       list_param[$#list_param] = ["_", arg];
 
     ));
+
     map_param : {[list_param[] => GROUP_BY >> \_.0 | {(_.0.0) : [_[] | _.1]}[]]};
 
     map_param
