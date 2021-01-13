@@ -1,4 +1,6 @@
 
+<a href="https://github.com/MirrgieRiana/fl7-module_fl7.argv/actions?query=workflow%3ATest"><img src="https://github.com/MirrgieRiana/fl7-module_fl7.argv/workflows/Test/badge.svg"></a>
+
 # Name
 
 fl7.argv - Very simple ARGV parser.
@@ -6,7 +8,7 @@ fl7.argv - Very simple ARGV parser.
 # Synopsys
 
 ```
-$ fl7 'USE(MODULE(FILE; "fl7.argv")).parse("Usage: args..."; ARGV[1; ]) => JSON >> 2' -a A1 +abc -a A2 file1 -b B1 --abc ABC1 -a A3 +a --abc=ABC2 file2
+$ fl7 'USE(MODULE(FILE; "fl7.argv")).parse("Usage: args..."; ARGV[1; ]) => JSON >> 2' -a A1 +abc -a A2 file1 -b B1 --abc ABC1 -a A3 +a ++def --abc=ABC2 file2
 ```
 
 prints
@@ -34,6 +36,9 @@ prints
   "abc": [
     "ABC1",
     "ABC2"
+  ],
+  "def": [
+    true
   ]
 }
 ```
