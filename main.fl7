@@ -1,0 +1,60 @@
+@STRICT;
+
+{
+
+  parse_argv : list_arg -> (
+    list_arg_2 : list_arg;
+
+    list_param : [];
+    WHILE(\($#list_arg_2 > 0)) | (continue:(
+      arg : list_arg_2.0;
+      list_arg_2 = list_arg_2[1; ];
+
+      # --key=value
+      m : arg =~ /^--(.*?)=(.*)$/;
+      m && (
+        key : m.1;
+        value : m.2;
+        list_param[$#list_param] = [key, value];
+        continue := ();
+      );
+
+      # --key value
+      m : arg =~ /^--(.*)$/;
+      m && (
+        key : m.1;
+        $#list_arg_2 <= 0 && usage();
+        value : list_arg_2.0;
+        list_arg_2 = list_arg_2[1; ];
+        list_param[$#list_param] = [key, value];
+        continue := ();
+      );
+
+      # +abc
+      m : arg =~ /^\+([a-zA-Z0-9]+)$/;
+      m && (
+        m.1[] | list_param[$#list_param] = [_, TRUE];
+        continue := ();
+      );
+
+      # -k value
+      m : arg =~ /^-([a-zA-Z0-9])$/;
+      m && (
+        key : m.1;
+        $#list_arg_2 <= 0 && usage();
+        value : list_arg_2.0;
+        list_arg_2 = list_arg_2[1; ];
+        list_param[$#list_param] = [key, value];
+        continue := ();
+      );
+
+      # value
+      list_param[$#list_param] = ["_", arg];
+
+    ));
+    map_param : {[list_param[] => GROUP_BY >> \_.0 | {(_.0.0) : [_[] | _.1]}[]]};
+
+    map_param
+  );
+
+}
