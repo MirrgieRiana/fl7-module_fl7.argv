@@ -24,6 +24,14 @@
         continue := ();
       );
 
+      # ++key
+      m : arg =~ /^\+\+(.*)$/;
+      m && (
+        key : m.1;
+        list_param[$#list_param] = [key, TRUE];
+        continue := ();
+      );
+
       # --key value
       m : arg =~ /^--(.*)$/;
       m && (
