@@ -2,7 +2,7 @@
 
 {
 
-  parse_argv : list_arg -> (
+  parse : list_arg -> (
     list_arg_2 : list_arg;
 
     list_param : [];
