@@ -1,0 +1,55 @@
+lib_argv : USE("main.fl7");
+
+assert_same : expected, actual -> (actual === expected || ERROR("$actual !== $expected"));
+assert_equals : expected, actual -> (actual == expected || ERROR("$actual != $expected"));
+
+OUT("Test Start");
+
+OUT("parse");
+
+assert_equals({}; lib_argv.parse(""; []));
+
+assert_equals({_ = ["file1"]}; lib_argv.parse(""; ["file1"]));
+assert_equals({_ = ["file1", "file2"]}; lib_argv.parse(""; ["file1", "file2"]));
+
+assert_equals({a = ["A1"]}; lib_argv.parse(""; ["-a", "A1"]));
+assert_equals({a = ["A1", "A2"]}; lib_argv.parse(""; ["-a", "A1", "-a", "A2"]));
+assert_equals({a = ["A1"]; b = ["B1"]}; lib_argv.parse(""; ["-a", "A1", "-b", "B1"]));
+
+assert_equals({a = [TRUE]}; lib_argv.parse(""; ["+a"]));
+assert_equals({a = [TRUE]; b = [TRUE]}; lib_argv.parse(""; ["+ab"]));
+assert_equals({a = [TRUE, TRUE]; b = [TRUE]}; lib_argv.parse(""; ["+aab"]));
+
+assert_equals({abc = ["ABC1"]}; lib_argv.parse(""; ["--abc=ABC1"]));
+assert_equals({abc = ["ABC1", "ABC2"]}; lib_argv.parse(""; ["--abc=ABC1", "--abc=ABC2"]));
+assert_equals({abc = ["ABC1"]; abc = ["DEF1"]}; lib_argv.parse(""; ["--abc=ABC1", "--def=DEF1"]));
+
+assert_equals({abc = ["ABC1"]}; lib_argv.parse(""; ["--abc", "ABC1"]));
+assert_equals({abc = ["ABC1", "ABC2"]}; lib_argv.parse(""; ["--abc", "ABC1", "--abc", "ABC2"]));
+assert_equals({abc = ["ABC1"]; abc = ["DEF1"]}; lib_argv.parse(""; ["--abc", "ABC1", "--def", "DEF1"]));
+
+assert_equals({abc = [TRUE]}; lib_argv.parse(""; ["++abc"]));
+assert_equals({abc = [TRUE, TRUE]}; lib_argv.parse(""; ["++abc", "++abc"]));
+assert_equals({abc = [TRUE]; abc = [TRUE]}; lib_argv.parse(""; ["+abc", "++def"]));
+
+assert_equals({
+  a = ["A1", TRUE, "A2", "A3", TRUE];
+  b = [TRUE, "B1"];
+  c = [TRUE];
+  _ = ["file1", "file2"];
+  abc = ["ABC1", "ABC2"];
+  def = [TRUE];
+}; lib_argv.parse(""; [
+  "-a", "A1",
+  "+abc",
+  "-a", "A2",
+  "file1",
+  "-b", "B1",
+  "--abc", "ABC1",
+  "-a", "A3",
+  "+a",
+  "++def",
+  "--abc=ABC2", "file2"
+]));
+
+OUT("OK");
