@@ -30,7 +30,7 @@ assert_equals({abc = ["ABC1"]; def = ["DEF1"]}; lib_argv.parse(""; ["--abc", "AB
 
 assert_equals({abc = [TRUE]}; lib_argv.parse(""; ["++abc"]));
 assert_equals({abc = [TRUE, TRUE]}; lib_argv.parse(""; ["++abc", "++abc"]));
-assert_equals({abc = [TRUE]; def = [TRUE]}; lib_argv.parse(""; ["+abc", "++def"]));
+assert_equals({abc = [TRUE]; def = [TRUE]}; lib_argv.parse(""; ["++abc", "++def"]));
 
 assert_equals({
   a = ["A1", TRUE, "A2", "A3", TRUE];
