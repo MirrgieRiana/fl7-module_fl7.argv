@@ -26,7 +26,7 @@ assert_equals({abc = ["ABC1"]; abc = ["DEF1"]}; lib_argv.parse(""; ["--abc=ABC1"
 
 assert_equals({abc = ["ABC1"]}; lib_argv.parse(""; ["--abc", "ABC1"]));
 assert_equals({abc = ["ABC1", "ABC2"]}; lib_argv.parse(""; ["--abc", "ABC1", "--abc", "ABC2"]));
-assert_equals({abc = ["ABC1"]; abc = ["DEF1"]}; lib_argv.parse(""; ["--abc", "ABC1", "--def", "DEF1"]));
+assert_equals({abc = ["ABC1"]; def = ["DEF1"]}; lib_argv.parse(""; ["--abc", "ABC1", "--def", "DEF1"]));
 
 assert_equals({abc = [TRUE]}; lib_argv.parse(""; ["++abc"]));
 assert_equals({abc = [TRUE, TRUE]}; lib_argv.parse(""; ["++abc", "++abc"]));
