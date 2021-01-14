@@ -7,30 +7,30 @@ OUT("Test Start");
 
 OUT("parse");
 
-assert_equals({}; lib_argv.parse(""; []));
+assert_equals({_ = []}; lib_argv.parse(""; []));
 
 assert_equals({_ = ["file1"]}; lib_argv.parse(""; ["file1"]));
 assert_equals({_ = ["file1", "file2"]}; lib_argv.parse(""; ["file1", "file2"]));
 
-assert_equals({a = ["A1"]}; lib_argv.parse(""; ["-a", "A1"]));
-assert_equals({a = ["A1", "A2"]}; lib_argv.parse(""; ["-a", "A1", "-a", "A2"]));
-assert_equals({a = ["A1"]; b = ["B1"]}; lib_argv.parse(""; ["-a", "A1", "-b", "B1"]));
+assert_equals({_ = []; a = ["A1"]}; lib_argv.parse(""; ["-a", "A1"]));
+assert_equals({_ = []; a = ["A1", "A2"]}; lib_argv.parse(""; ["-a", "A1", "-a", "A2"]));
+assert_equals({_ = []; a = ["A1"]; b = ["B1"]}; lib_argv.parse(""; ["-a", "A1", "-b", "B1"]));
 
-assert_equals({a = [TRUE]}; lib_argv.parse(""; ["+a"]));
-assert_equals({a = [TRUE]; b = [TRUE]}; lib_argv.parse(""; ["+ab"]));
-assert_equals({a = [TRUE, TRUE]; b = [TRUE]}; lib_argv.parse(""; ["+aab"]));
+assert_equals({_ = []; a = [TRUE]}; lib_argv.parse(""; ["+a"]));
+assert_equals({_ = []; a = [TRUE]; b = [TRUE]}; lib_argv.parse(""; ["+ab"]));
+assert_equals({_ = []; a = [TRUE, TRUE]; b = [TRUE]}; lib_argv.parse(""; ["+aab"]));
 
-assert_equals({abc = ["ABC1"]}; lib_argv.parse(""; ["--abc=ABC1"]));
-assert_equals({abc = ["ABC1", "ABC2"]}; lib_argv.parse(""; ["--abc=ABC1", "--abc=ABC2"]));
-assert_equals({abc = ["ABC1"]; def = ["DEF1"]}; lib_argv.parse(""; ["--abc=ABC1", "--def=DEF1"]));
+assert_equals({_ = []; abc = ["ABC1"]}; lib_argv.parse(""; ["--abc=ABC1"]));
+assert_equals({_ = []; abc = ["ABC1", "ABC2"]}; lib_argv.parse(""; ["--abc=ABC1", "--abc=ABC2"]));
+assert_equals({_ = []; abc = ["ABC1"]; def = ["DEF1"]}; lib_argv.parse(""; ["--abc=ABC1", "--def=DEF1"]));
 
-assert_equals({abc = ["ABC1"]}; lib_argv.parse(""; ["--abc", "ABC1"]));
-assert_equals({abc = ["ABC1", "ABC2"]}; lib_argv.parse(""; ["--abc", "ABC1", "--abc", "ABC2"]));
-assert_equals({abc = ["ABC1"]; def = ["DEF1"]}; lib_argv.parse(""; ["--abc", "ABC1", "--def", "DEF1"]));
+assert_equals({_ = []; abc = ["ABC1"]}; lib_argv.parse(""; ["--abc", "ABC1"]));
+assert_equals({_ = []; abc = ["ABC1", "ABC2"]}; lib_argv.parse(""; ["--abc", "ABC1", "--abc", "ABC2"]));
+assert_equals({_ = []; abc = ["ABC1"]; def = ["DEF1"]}; lib_argv.parse(""; ["--abc", "ABC1", "--def", "DEF1"]));
 
-assert_equals({abc = [TRUE]}; lib_argv.parse(""; ["++abc"]));
-assert_equals({abc = [TRUE, TRUE]}; lib_argv.parse(""; ["++abc", "++abc"]));
-assert_equals({abc = [TRUE]; def = [TRUE]}; lib_argv.parse(""; ["++abc", "++def"]));
+assert_equals({_ = []; abc = [TRUE]}; lib_argv.parse(""; ["++abc"]));
+assert_equals({_ = []; abc = [TRUE, TRUE]}; lib_argv.parse(""; ["++abc", "++abc"]));
+assert_equals({_ = []; abc = [TRUE]; def = [TRUE]}; lib_argv.parse(""; ["++abc", "++def"]));
 
 assert_equals({
   a = ["A1", TRUE, "A2", "A3", TRUE];
