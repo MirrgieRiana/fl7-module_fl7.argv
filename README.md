@@ -57,8 +57,8 @@ $ fl7m pull 'https://raw.githubusercontent.com/MirrgieRiana/fl7-module_fl7.argv/
 
 # Usage
 
-## `_.parse(usage; list_arg)` function
+## `_.parse([usage[; list_arg]])` function
 
-- `usage`: a parse error message as a strings
-- `list_arg`: set the `ARGV[1; ]` as an array of strings
+- `usage`: a parse error message as a strings (default: "Argument Error")
+- `list_arg`: set the `[ARGS]` as an array of strings (default: `[ARGS]`)
 - Returns: an object whose value is an array of parsed arguments
