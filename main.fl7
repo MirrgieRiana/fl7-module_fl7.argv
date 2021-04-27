@@ -14,9 +14,19 @@ lib : {
       list_arg_2 : list_arg;
 
       list_param : [];
-      WHILE(\($#list_arg_2 > 0)) | (continue:(
+      \($#list_arg_2 > 0) => WHILE | (continue:(
         arg : list_arg_2.0;
         list_arg_2 = list_arg_2[1; ];
+
+        # --
+        m : arg =~ /^--$/;
+        m && (
+          \($#list_arg_2 > 0) => WHILE | (
+            list_param[$#list_param] = ["_", list_arg_2.0];
+            list_arg_2 = list_arg_2[1; ];
+          );
+          continue := ();
+        );
 
         # --key=value
         m : arg =~ /^--(.+?)=(.*)$/;
