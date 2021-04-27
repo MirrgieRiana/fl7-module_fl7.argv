@@ -19,7 +19,7 @@ lib : {
         list_arg_2 = list_arg_2[1; ];
 
         # --key=value
-        m : arg =~ /^--(.*?)=(.*)$/;
+        m : arg =~ /^--(.+?)=(.*)$/;
         m && (
           key : m.1;
           value : m.2;
@@ -28,7 +28,7 @@ lib : {
         );
 
         # ++key
-        m : arg =~ /^\+\+(.*)$/;
+        m : arg =~ /^\+\+(.+)$/;
         m && (
           key : m.1;
           list_param[$#list_param] = [key, TRUE];
@@ -36,7 +36,7 @@ lib : {
         );
 
         # --key value
-        m : arg =~ /^--(.*)$/;
+        m : arg =~ /^--(.+)$/;
         m && (
           key : m.1;
           $#list_arg_2 <= 0 && print_usage();
