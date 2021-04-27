@@ -32,11 +32,13 @@ assert_equals({_ = []; abc = [TRUE]}; lib_argv.parse(""; ["++abc"]));
 assert_equals({_ = []; abc = [TRUE, TRUE]}; lib_argv.parse(""; ["++abc", "++abc"]));
 assert_equals({_ = []; abc = [TRUE]; def = [TRUE]}; lib_argv.parse(""; ["++abc", "++def"]));
 
+assert_equals({_ = ["--abc=ABC", "--", "-x"]}; lib_argv.parse(""; ["--", "--abc=ABC", "--", "-x"]));
+
 assert_equals({
   a = ["A1", TRUE, "A2", "A3", TRUE];
   b = [TRUE, "B1"];
   c = [TRUE];
-  _ = ["file1", "file2"];
+  _ = ["file1", "file2", "--abc=ABC3", "+X", "++X:ABC", "--"];
   abc = ["ABC1", "ABC2"];
   def = [TRUE];
 }; lib_argv.parse(""; [
@@ -49,7 +51,8 @@ assert_equals({
   "-a", "A3",
   "+a",
   "++def",
-  "--abc=ABC2", "file2"
+  "--abc=ABC2", "file2",
+  "--", "--abc=ABC3", "+X", "++X:ABC", "--",
 ]));
 
 OUT("OK");
