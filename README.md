@@ -8,7 +8,7 @@ fl7.argv - Very simple ARGV parser.
 # Synopsys
 
 ```
-$ fl7 'USE(MODULE(FILE; "fl7.argv")).parse("Usage: args..."; ARGV[1; ]) => JSON >> 2' -a A1 +abc -a A2 file1 -b B1 --abc ABC1 -a A3 +a ++def --abc=ABC2 file2
+$ fl7 'USE(MODULE(FILE; "fl7.argv")).parse("Usage: args..."; ARGV[1; ]) => JSON >> 2' -a A1 +abc -a A2 file1 -b B1 --abc ABC1 -a A3 +a ++def --abc=ABC2 file2 -- +X --
 ```
 
 prints
@@ -31,7 +31,9 @@ prints
   ],
   "_": [
     "file1",
-    "file2"
+    "file2",
+    "+X",
+    "--"
   ],
   "abc": [
     "ABC1",
